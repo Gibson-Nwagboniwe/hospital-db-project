@@ -36,7 +36,7 @@ It features normalized table structures, foreign key relationships, and sample d
 hospital-db-project/
 ├── schema/
 │   ├── create_tables.sql      # SQL script to create all tables
-│   └── insert_data.sql        # SQL script with 20 rows of realistic sample data
+│   └── insert_sample_data.sql        # SQL script with 20 rows of realistic sample data
 ├── backup_restore/
 │   └── backup_script.sh       # Shell script to back up the PostgreSQL database
 ├── docs/
@@ -69,7 +69,7 @@ From the PostgreSQL interactive shell (`psql`):
 ### 2. Insert Sample Data
 
 ```sql
-\i schema/insert_data.sql
+\i schema/insert_sample_data.sql
 ```
 
 ### 3. Run a Backup
@@ -87,7 +87,7 @@ This will create a timestamped backup in a `backups/` folder.
 
 ```sql
 -- List all upcoming appointments
-SELECT a.appointment_date, d.first_name || ' ' || d.last_name AS doctor, p.first_name || ' ' || p.last_name AS patient
+SELECT a.appointment_date, d.first_name, d.last_name AS doctor, p.first_name, p.last_name AS patient
 FROM appointments a
 JOIN doctors d ON a.doctor_id = d.doctor_id
 JOIN patients p ON a.patient_id = p.patient_id
