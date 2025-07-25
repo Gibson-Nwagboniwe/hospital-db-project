@@ -1,0 +1,52 @@
+Project hospital_db {
+  database_type: "PostgreSQL"
+  note: "ER diagram for hospital database project by Gibson Nwagboniwe"
+}
+
+Table departments {
+  department_id SERIAL [pk]
+  department_name VARCHAR(100)
+  floor INT
+}
+
+Table patients {
+  patient_id SERIAL [pk]
+  first_name VARCHAR(100)
+  last_name VARCHAR(100)
+  dob DATE
+  gender VARCHAR(10)
+  contact VARCHAR(50)
+}
+
+Table staffs {
+  staff_id SERIAL [pk]
+  first_name VARCHAR(100)
+  last_name VARCHAR(100)
+  role VARCHAR(50)
+  username VARCHAR(50)
+  password TEXT
+}
+
+Table doctors {
+  doctor_id SERIAL [pk]
+  first_name VARCHAR(100)
+  last_name VARCHAR(100)
+  specilaty VARCHAR(200)
+  phone_number VARCHAR(20)
+  department_id INT [ref: > departments.department_id]
+}
+
+Table appointments {
+  appointment_id SERIAL [pk]
+  patient_id INT [ref: > patients.patient_id]
+  doctor_id INT [ref: > doctors.doctor_id]
+  appointment_date TIMESTAMP
+  reason TEXT
+}
+
+Table prescriptions {
+  prescription_id SERIAL [pk]
+  appointment_id INT [ref: > appointments.appointment_id]
+  medication TEXT
+  dosage TEXT
+}
